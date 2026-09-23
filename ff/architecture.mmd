@@ -1,0 +1,25 @@
+graph TD
+    USER[User: Elderly/Low-Literacy]
+
+    subgraph Frontend [Accessibility-First UI - React/Flutter]
+        UI[Microphone / Scanner / Search]
+    end
+
+    subgraph Backend [FastAPI - Action Engine]
+        Whisper[Voice-to-Text: Whisper]
+        OCR[OCR: Tesseract]
+        Rules[Rule Engine: Eligibility Checks]
+        RAG[RAG: Verified Gov KB]
+        LLM[LLM: Explanation Layer]
+    end
+
+    USER -->|Voice/Scan| UI
+    UI -->|JSON Input| Backend
+
+    Whisper & OCR --> IntentDetection[Intent Detection]
+    IntentDetection --> Rules
+    Rules --> RAG
+    RAG & Rules --> LLM
+
+    LLM -->|Step-by-step Guidance| UI
+    UI -->|Displays Guidance| USER

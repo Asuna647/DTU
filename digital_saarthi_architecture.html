@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Saarthi - Architecture Documentation</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        .cover {
+            text-align: center;
+            padding: 100px 0;
+            page-break-after: always;
+        }
+        .cover h1 {
+            font-size: 42px;
+            color: #1a5f2a;
+            margin-bottom: 10px;
+        }
+        .cover h2 {
+            font-size: 24px;
+            color: #555;
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+        .cover .meta {
+            font-size: 16px;
+            color: #888;
+            margin-top: 60px;
+        }
+        h1 {
+            color: #1a5f2a;
+            border-bottom: 2px solid #1a5f2a;
+            padding-bottom: 8px;
+            margin-top: 40px;
+            page-break-before: always;
+        }
+        h1:first-of-type {
+            page-break-before: avoid;
+        }
+        h2 {
+            color: #2d3748;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #4a5568;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f7fafc;
+            color: #2d3748;
+        }
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        code {
+            background-color: #edf2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        pre {
+            background-color: #2d3748;
+            color: #f7fafc;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        pre code {
+            background-color: transparent;
+            color: inherit;
+        }
+        .box {
+            background-color: #ebf8ff;
+            border-left: 4px solid #3182ce;
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning {
+            background-color: #fffaf0;
+            border-left: 4px solid #dd6b20;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .diagram {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        .toc {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin-bottom: 8px;
+        }
+        .toc a {
+            color: #2b6cb0;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cover Page -->
+    <div class="cover">
+        <h1>🚶‍♂️ Digital Saarthi</h1>
+        <h2>AI-Powered Action-Guidance Layer for Government Services</h2>
+        <p style="font-size: 18px; color: #4a5568;">Comprehensive Architecture & Implementation Guide</p>
+
+        <div class="meta">
+            <p><strong>Hackathon:</strong> DTU Vivekananda Innovation Hackathon 2026</p>
+            <p><strong>Theme:</strong> Ideas for a Better Tomorrow</p>
+            <p><strong>Date:</strong> October 2026</p>
+            <p><strong>Version:</strong> 1.0.0</p>
+        </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li>1. Executive Summary</li>
+            <li>2. Problem Statement</li>
+            <li>3. System Architecture</li>
+            <li>4. Component Details</li>
+            <li>5. AI/ML Models & Integration</li>
+            <li>6. API Documentation</li>
+            <li>7. Implementation Guide</li>
+            <li>8. Marketing & Pitch Strategy</li>
+            <li>9. Appendix</li>
+        </ul>
+    </div>
+
+    <!-- Executive Summary -->
+    <h1>1. Executive Summary</h1>
+    <p>Digital Saarthi is an <strong>AI-powered "Action-Guidance Layer"</strong> designed to help elderly citizens and people with low digital literacy access government services. Unlike existing platforms like UMANG or DigiLocker that assume technical proficiency, Digital Saarthi provides:</p>
+
+    <ul>
+        <li><strong>Voice-first interaction</strong> in Hindi and English</li>
+        <li><strong>Document scanning</strong> with automatic data extraction</li>
+        <li><strong>Step-by-step guidance</strong> with visual action plans</li>
+        <li><strong>Verified information</strong> through a hardcoded rule engine</li>
+        <li><strong>Accessibility-first UI</strong> with large buttons, high contrast, and text-to-speech</li>
+    </ul>
+
+    <!-- Architecture Diagram -->
+    <h1>3. System Architecture</h1>
+    <div class="diagram">
++─────────────────────────────────────────────────────────────────────────────+
+│                           DIGITAL SAARTHI SYSTEM                            │
++─────────────────────────────────────────────────────────────────────────────+
+│                                                                             │
+│  +─────────────────────────────────────────────────────────────────────+   │
+│  │                      USER INTERFACE (React)                         │   │
+│  │  +─────────────+  +─────────────+  +─────────────+                  │   │
+│  │  │ Voice Input │  │ Doc Scanner │  │Result Cards │                  │   │
+│  │  │  🎤 mic     │  │  📷 upload  │  │  📋 steps   │                  │   │
+│  │  +─────────────+  +─────────────+  +─────────────+                  │   │
+│  │         │                 │                  │                        │   │
+│  │         +─────────────────+──────────────────+                        │   │
+│  │                           ▼                                           │   │
+│  │                   +───────────────+                                  │   │
+│  │                   │  FastAPI API  │                                  │   │
+│  │                   +───────┬───────+                                  │   │
+│  +───────────────────────────┼───────────────────────────────────────────+   │
+│                              │                                                │
+│  +───────────────────────────┼───────────────────────────────────────────+   │
+│  │                      BACKEND LAYER                                    │   │
+│  │                           │                                            │   │
+│  │  +────────────+  +────────▼───────+  +────────────+                   │   │
+│  │  │  Speech    │  │  Rule Engine   │  │    RAG     │                   │   │
+│  │  │  Service   │  │  (Safety Core) │  │  Service   │                   │   │
+│  │  +────────────+  +────────────────+  +────────────+                   │   │
+│  +───────────────────────────────────────────────────────────────────────+   │
+│                                                                             │
+│  +───────────────────────────────────────────────────────────────────────+   │
+│  │                        AI/ML LAYER                                    │   │
+│  │  +─────────────+  +─────────────+  +─────────────+                    │   │
+│  │  │  Whisper    │  │   Tesseract │  │    LLM      │                    │   │
+│  │  │  (STT)      │  │    (OCR)    │  │ (Explanation)│                    │   │
+│  │  +─────────────+  +─────────────+  +─────────────+                    │   │
+│  +───────────────────────────────────────────────────────────────────────+   │
++─────────────────────────────────────────────────────────────────────────────+
+    </div>
+
+    <h2>Technology Stack</h2>
+    <table>
+        <tr>
+            <th>Layer</th>
+            <th>Technology</th>
+            <th>Purpose</th>
+        </tr>
+        <tr>
+            <td>Frontend</td>
+            <td>React + TypeScript</td>
+            <td>Accessible UI with large buttons and high contrast</td>
+        </tr>
+        <tr>
+            <td>Backend</td>
+            <td>FastAPI (Python)</td>
+            <td>High-performance REST API</td>
+        </tr>
+        <tr>
+            <td>Speech-to-Text</td>
+            <td>Whisper</td>
+            <td>Transcribing voice queries in local languages</td>
+        </tr>
+        <tr>
+            <td>OCR</td>
+            <td>Tesseract</td>
+            <td>Extracting text from Aadhaar and government documents</td>
+        </tr>
+        <tr>
+            <td>Rule Engine</td>
+            <td>Custom Python</td>
+            <td>Hardcoded eligibility verification (Safety Core)</td>
+        </tr>
+        <tr>
+            <td>RAG</td>
+            <td>Custom Knowledge Base</td>
+            <td>Verified scheme details and requirements</td>
+        </tr>
+    </table>
+
+    <!-- Component Details -->
+    <h1>4. Component Details</h1>
+
+    <h2>4.1 Rule Engine (app/rule_engine.py)</h2>
+    <p>The <strong>Safety Core</strong> of Digital Saarthi ensures zero hallucinations by using deterministic, hardcoded eligibility logic.</p>
+
+    <div class="box">
+        <strong>Key Rule for IGNOAPS Pension:</strong><br>
+        Age ≥ 60 AND Has BPL Card = ELIGIBLE<br>
+        Age &lt; 60 OR No BPL Card = NOT ELIGIBLE
+    </div>
+
+    <h2>4.2 Speech Service (app/speech_service.py)</h2>
+    <p>Handles voice interaction, intent detection, and text-to-speech audio generation for accessibility.</p>
+
+    <h2>4.3 OCR Service (app/ocr_service.py)</h2>
+    <p>Parses uploaded Aadhaar cards or government notices using Tesseract and regex pattern matching.</p>
+
+    <!-- Marketing & Pitch -->
+    <h1>8. Marketing & Pitch Strategy</h1>
+
+    <div class="warning">
+        <strong>The Pitch:</strong> "72 million elderly Indians struggle with digital government services. Digital Saarthi bridges the literacy gap with voice-first, step-by-step guidance."
+    </div>
+
+    <h2>Judges' Scorecard</h2>
+    <table>
+        <tr>
+            <th>Criteria</th>
+            <th>Our Solution</th>
+        </tr>
+        <tr>
+            <td>Problem Understanding</td>
+            <td>Addresses the digital literacy and accessibility gap</td>
+        </tr>
+        <tr>
+            <td>Technical Complexity</td>
+            <td>FastAPI, React, Whisper, Tesseract, Rule Engine, RAG</td>
+        </tr>
+        <tr>
+            <td>Innovation</td>
+            <td>Verified Action-Guidance Layer concept</td>
+        </tr>
+        <tr>
+            <td>Impact</td>
+            <td>72M+ elderly citizens in India</td>
+        </tr>
+        <tr>
+            <td>Demo Quality</td>
+            <td>Working prototype with demo mode</td>
+        </tr>
+    </table>
+
+    <!-- Footer -->
+    <div style="text-align: center; margin-top: 60px; color: #888; font-size: 14px;">
+        <p>Digital Saarthi Project Architecture — Generated for DTU Hackathon 2026</p>
+    </div>
+
+</body>
+</html>
